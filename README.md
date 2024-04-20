@@ -1,23 +1,7 @@
-# GLFW packaged for the Zig build system
+# GLFW for zig 0.12.0
 
-This is a fork of [glfw](https://github.com/glfw/glfw), packaged for Zig. Unnecessary files have been deleted, and the build system has been replaced with build.zig.
+This is a fork of [glfw](https://github.com/hexops/glfw), updated for zig 0.12.0 and packaged with all the dependencies.
 
-_Looking for Zig bindings to GLFW?_ See [mach/glfw](https://github.com/hexops/mach-glfw).
+Of course this repo will update along [Zig3D](https://github.com/Darkfllame/Zig3D), I will make so to always use the latest zig version.
 
-## Updating
-
-To update this repository, run `./update.sh` followed by `./verify.sh` to verify the repository contents.
-
-## Verifying repository contents
-
-For supply chain security reasons (e.g. to confirm we made no patches to the code) we provide a `git diff` command you can run to verify the contents of this repository:
-
-```sh
-./verify.sh
-```
-
-If nothing is printed, there is no diff. Deleted files, and changes to `README.md`, `build.zig`, `.github` CI files and `.gitignore` are ignored.
-
-## Issues
-
-Issues are tracked in the [main Mach repository](https://github.com/hexops/mach/issues?q=is%3Aissue+is%3Aopen+label%3Aglfw).
+If you really want the raw bindings you can use this library. Otherwise, I highly recommend you to use my wrapper library: Zig3D.
