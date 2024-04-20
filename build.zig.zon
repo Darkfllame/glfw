@@ -2,6 +2,11 @@
     .name = "glfw",
     .version = "0.0.0",
     .paths = .{
+        "dependencies/",
+        "dependencies/vulkan_headers/",
+        "dependencies/wayland_headers/",
+        "dependencies/x11_headers/",
+        "dependencies/xcode_frameworks/",
         "include/",
         "src/",
         "build.zig",
@@ -9,8 +14,6 @@
         "CONTRIBUTORS.md",
         "LICENSE.md",
         "README.md",
-        "update.sh",
-        "verify.sh",
     },
     .dependencies = .{
         .xcode_frameworks = .{
