@@ -1,20 +1,6 @@
 .{
     .name = "glfw",
     .version = "0.0.0",
-    .paths = .{
-        "dependencies/",
-        "dependencies/vulkan_headers/",
-        "dependencies/wayland_headers/",
-        "dependencies/x11_headers/",
-        "dependencies/xcode_frameworks/",
-        "include/",
-        "src/",
-        "build.zig",
-        "build.zig.zon",
-        "CONTRIBUTORS.md",
-        "LICENSE.md",
-        "README.md",
-    },
     .dependencies = .{
         .xcode_frameworks = .{
             .path = "dependencies/xcode_frameworks",
@@ -28,5 +14,19 @@
         .x11_headers = .{
             .path = "dependencies/x11_headers",
         },
+    },
+    .paths = .{
+        "dependencies/",
+        "dependencies/vulkan_headers/",
+        "dependencies/wayland_headers/",
+        "dependencies/x11_headers/",
+        "dependencies/xcode_frameworks/",
+        "include/",
+        "src/",
+        "build.zig",
+        "build.zig.zon",
+        "CONTRIBUTORS.md",
+        "LICENSE.md",
+        "README.md",
     },
 }

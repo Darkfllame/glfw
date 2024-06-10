@@ -22,9 +22,15 @@ pub fn build(b: *std.Build) void {
             .optimize = optimize,
         },
     });
-    lib.addIncludePath(.{ .path = "include" });
+    lib.addIncludePath(b.path("include"));
     lib.linkLibC();
-    addPaths(&lib.root_module);
+    { // xcode_frameworks
+        const xf_dep = b.dependency("xcode_frameworks", .{
+            .target = target,
+            .optimize = optimize,
+        });
+        addPaths(xf_dep.builder, &lib.root_module);
+    }
 
     if (shared) lib.defineCMacro("_GLFW_BUILD_DLL", "1");
 
@@ -150,8 +156,8 @@ pub fn build(b: *std.Build) void {
     b.installArtifact(lib);
 }
 
-pub fn addPaths(mod: *std.Build.Module) void {
-    if (mod.resolved_target.?.result.os.tag == .macos) @import("xcode_frameworks").addPaths(mod);
+pub fn addPaths(xf: *std.Build, mod: *std.Build.Module) void {
+    if (mod.resolved_target.?.result.os.tag == .macos) @import("xcode_frameworks").addPaths(xf, mod);
 }
 
 const base_sources = [_][]const u8{

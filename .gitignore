@@ -102,4 +102,5 @@ tests/window
 tests/windows
 
 # Zig stuff
-zig-*
+**/zig-out/
+**/.zig-cache/
