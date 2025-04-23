@@ -17,10 +17,10 @@ pub fn build(b: *std.Build) void {
         .name = "glfw",
         .kind = .lib,
         .linkage = if (shared) .dynamic else .static,
-        .root_module = .{
+        .root_module = b.createModule(.{
             .target = target,
             .optimize = optimize,
-        },
+        }),
     });
     lib.addIncludePath(b.path("include"));
     lib.linkLibC();
@@ -29,10 +29,10 @@ pub fn build(b: *std.Build) void {
             .target = target,
             .optimize = optimize,
         });
-        addPaths(xf_dep.builder, &lib.root_module);
+        addPaths(xf_dep.builder, lib.root_module);
     }
 
-    if (shared) lib.defineCMacro("_GLFW_BUILD_DLL", "1");
+    if (shared) lib.root_module.addCMacro("_GLFW_BUILD_DLL", "1");
 
     lib.installHeadersDirectory(b.path("include/GLFW"), "GLFW", .{});
     // GLFW headers depend on these headers, so they must be distributed too.
@@ -56,9 +56,9 @@ pub fn build(b: *std.Build) void {
         lib.installLibraryHeaders(wayland_headers_dep.artifact("wayland-headers"));
     }
 
-    if (target.result.isDarwin()) {
+    if (target.result.isDarwinLibC()) {
         // MacOS: this must be defined for macOS 13.3 and older.
-        lib.defineCMacro("__kernel_ptr_semantics", "");
+        lib.root_module.addCMacro("__kernel_ptr_semantics", "");
     }
 
     const include_src_flag = "-Isrc";
@@ -138,7 +138,7 @@ pub fn build(b: *std.Build) void {
             }
 
             if (use_wl) {
-                lib.defineCMacro("WL_MARSHAL_FLAG_DESTROY", "1");
+                lib.root_module.addCMacro("WL_MARSHAL_FLAG_DESTROY", "1");
 
                 sources.appendSlice(&linux_wl_sources) catch unreachable;
                 flags.append("-D_GLFW_WAYLAND") catch unreachable;

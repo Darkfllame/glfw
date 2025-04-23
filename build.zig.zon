@@ -1,5 +1,6 @@
 .{
-    .name = "glfw",
+    .name = .glfw,
+    .fingerprint = 0x3bbe0a5cb54c831d,
     .version = "0.0.0",
     .dependencies = .{
         .xcode_frameworks = .{
